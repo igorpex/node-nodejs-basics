@@ -57,6 +57,7 @@ export const listWithSizes = async (directory) => {
   }
 };
 
+list();
 
 /* 
 list.js - implement function that prints all array of filenames 
