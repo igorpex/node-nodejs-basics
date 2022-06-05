@@ -1,7 +1,12 @@
 import { Worker } from 'worker_threads';
 import os from 'os';
+import path from 'path';
+import { getDirname } from '../utils.js';
+const __dirname = getDirname(import.meta.url);
 
 export const performCalculations = async () => {
+
+    const filePath = path.join(__dirname, 'worker.js');
 
     const numOfCpus = os.cpus().length;
     let promises = [];
@@ -9,9 +14,7 @@ export const performCalculations = async () => {
     for (let i = 0; i < numOfCpus; i++) {
         const n = 10 + i;
         const workerPromise = new Promise((resolve, reject) => {
-            const worker = new Worker('./worker.js', {
-                workerData: n,
-            });
+            const worker = new Worker(filePath, { workerData: n });
             worker.on('message', msg => resolve({ status: msg.status, data: msg.data }));
             worker.on('error', () => reject({ status: 'error', data: null }));
             worker.on('exit', (code) => {
@@ -27,4 +30,6 @@ export const performCalculations = async () => {
 };
 
 // test
+// from command line: "node main.js"  or "node .\src\wt\main.js" (from root folder on windows)
+// from script: "npm run wt"
 console.log(await performCalculations());
