@@ -18,7 +18,6 @@ export const create = async (filename = 'fresh.txt') => {
             if (newFileStat.isFile()) {
                 throw new Error("FS operation failed - file exists");
             }
-            fs.writeFile(newFilePath, newFileContent, 'utf-8');
         } catch (e) {
             if (e.code !== 'ENOENT') {
                 console.log(e);
