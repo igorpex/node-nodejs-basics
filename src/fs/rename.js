@@ -19,16 +19,16 @@ const rename = async (oldFilename, newFilename) => {
                 throw new Error("FS operation failed - new Filename already exists");
             }
         } catch (e) {
-            if (e.code !== 'ENOENT') {
-                console.log(e);
+            if (e.code === 'ENOENT') {
+                // console.log(e);
             } else throw e
         };
     };
 
     const checkOldExist = async () => {
         try {
-            let newFileStat = await fs.stat(oldFilepath);
-            if (newFileStat.isFile()) {
+            let oldFileStat = await fs.stat(oldFilepath);
+            if (oldFileStat.isFile()) {
                 return true
             }
         } catch (e) {
