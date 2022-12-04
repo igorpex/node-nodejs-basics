@@ -5,19 +5,20 @@ import { getDirname } from '../utils.js';
 import { fileURLToPath } from "url";
 import { createRequire } from 'module';
 import './files/c.js';
+import * as a from './files/a.json' assert { type: "json" };
+import * as b from './files/b.json' assert { type: "json" };
 
 const __dirname = getDirname(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
-const require = createRequire(import.meta.url);
 
 const random = Math.random();
 
 let unknownObject;
 
 if (random > 0.5) {
-    unknownObject = require('./files/a.json');
+    unknownObject = a;
 } else {
-    unknownObject = require('./files/b.json');
+    unknownObject = b;
 }
 
 console.log(`Release ${release()}`);
