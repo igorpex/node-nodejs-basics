@@ -16,7 +16,7 @@ const calculateHash = async (fileName) => {
         const hash = crypto.createHash('sha256');
         hash.update(fileBuffer);
         const hexHash = hash.digest('hex');
-        return hexHash;
+        console.log(hexHash)
     } catch (e) {
         if (e.code === 'ENOENT') {
             throw new Error("FS operation failed - file not found");
