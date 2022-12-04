@@ -15,7 +15,7 @@ const spawnChildProcess = async (args) => {
 };
 
 // test
-// from command line: "node cp.js --one --two"
+// from command line: "node cp.js --one --two" or node ./src/cp/cp.js --one --two
 // from script: "npm run cp"
 const args = process.argv.slice(2);
 spawnChildProcess(args);
